@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BloodBank.BusinessLogic\BloodBank.BusinessLogic.csproj" />
+    <ProjectReference Include="..\BloodBank.Comman\BloodBank.Comman.csproj" />
+    <ProjectReference Include="..\BloodBank.DataAccess\BloodBank.DataAccess.csproj" />
+    <ProjectReference Include="..\BloodBank.Properties\BloodBank.Properties.csproj" />
+  </ItemGroup>
+
+</Project>

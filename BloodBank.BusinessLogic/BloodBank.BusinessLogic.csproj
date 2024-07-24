@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BloodBank.Comman\BloodBank.Comman.csproj" />
+    <ProjectReference Include="..\BloodBank.DataAccess\BloodBank.DataAccess.csproj" />
+    <ProjectReference Include="..\BloodBank.Properties\BloodBank.Properties.csproj" />
+  </ItemGroup>
+
+</Project>
