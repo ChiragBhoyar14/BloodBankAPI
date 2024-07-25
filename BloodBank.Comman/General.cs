@@ -15,7 +15,7 @@ namespace BloodBank.Comman
             List<T> list = new List<T>();
 
             foreach (DataRow row in table.Rows)
-            {
+            {   
                 T obj = new T();
 
                 foreach (var prop in typeof(T).GetProperties())
