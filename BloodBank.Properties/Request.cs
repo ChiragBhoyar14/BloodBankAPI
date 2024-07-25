@@ -2,9 +2,10 @@
 {
     public class Request
     {
-        public string State { get; set; }
-        public string City { get; set; }
-        public string BloodGroup { get; set; }
-
+        public long StateId { get; set; }
+        public long CityId { get; set; }
+        public int BloodGroupId {  get; set; }
+        public string Name { get; set; }
+        public string DonerId { get; set; }
     }
 }
