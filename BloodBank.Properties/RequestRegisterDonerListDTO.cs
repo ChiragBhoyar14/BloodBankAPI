@@ -21,6 +21,7 @@ namespace BloodBank.Properties
             HighBPStatus = string.Empty ;
             BloodGroup = string.Empty ;
             State = string.Empty ;
+            Password = string.Empty ;
         }
 
         public string Name { get; set; }
@@ -35,5 +36,6 @@ namespace BloodBank.Properties
         public string BloodGroup { get; set; }
         public string State { get; set; }
         public string City { get; set; }
+        public string Password { get; set; }
     }
 }

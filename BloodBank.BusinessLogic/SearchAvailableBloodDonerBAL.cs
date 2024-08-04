@@ -1,8 +1,6 @@
 ﻿using BloodBank.Comman;
 using BloodBank.DataAccess;
 using BloodBank.Properties;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 
