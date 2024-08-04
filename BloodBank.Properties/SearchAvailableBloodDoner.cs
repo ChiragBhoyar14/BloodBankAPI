@@ -24,6 +24,25 @@ namespace BloodBank.Properties
         public string HighSugarStatus { get; set; }
         public string HighBPStatus { get; set; }
 
+        public SearchAvailableBloodDonerListDTO()
+        {
+            DonerId = 0;
+            DonarName = string.Empty;
+            BloodGroup = string.Empty;
+            Mobile = string.Empty;
+            Email = string.Empty;
+            City = string.Empty;
+            State = string.Empty;
+            DateOfBirth = DateTime.MinValue;
+            Gender = string.Empty;
+            RegisterDate = DateTime.MinValue;
+            IsPublished = false;
+            LastDonationDate = DateTime.MinValue;
+            Address = string.Empty;
+            HighSugarStatus = string.Empty;
+            HighBPStatus = string.Empty;
+        }
+
     }
 
 }

@@ -9,6 +9,12 @@ namespace BloodBank.Properties
     public class GetBloodGroupListDTO
     {
         public int BloodGroupId { get; set; }
-        public int BloodGroup { get;set; }
+        public string BloodGroup { get;set; }
+
+        public GetBloodGroupListDTO()
+        {
+            BloodGroupId = 0;  
+            BloodGroup = string.Empty;
+        }
     }
 }

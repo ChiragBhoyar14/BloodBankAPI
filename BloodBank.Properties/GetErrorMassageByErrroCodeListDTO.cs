@@ -11,5 +11,12 @@ namespace BloodBank.Properties
         public long ErrorCode { get; set; }
         public string ErrorMassage { get; set; }
         public long ErrorCodeId { get; set; }
+
+        public GetErrorMassageByErrroCodeListDTO()
+        {
+            ErrorCode = 0;
+            ErrorCodeId = 0;
+            ErrorMassage = string.Empty;
+        }
     }
 }
