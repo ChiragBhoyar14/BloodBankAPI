@@ -1,6 +1,7 @@
 ﻿using BloodBank.BusinessLogic;
 using BloodBank.Comman;
 using BloodBank.DataAccess;
+using BloodBank.IRepository;
 using BloodBank.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -15,18 +16,19 @@ namespace BloodBankAPI.Controllers
     public class SearchAvailableBloodDonerController : ControllerBase
     {
         public readonly AppDb _appDb;
+        private readonly IBloodDoner _ibloodDoner;
 
-        public SearchAvailableBloodDonerController(AppDb appDb)
+
+        public SearchAvailableBloodDonerController(AppDb appDb, IBloodDoner ibloodDoner)
         {
             _appDb = appDb;
+            _ibloodDoner = ibloodDoner;
         }
 
         [HttpPost]
         public async Task<IActionResult> SearchAvailableBloodDoner(Request objRequest)
         {
             Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
-            SearchAvailableBloodDonerBAL objSearchAvailableBloodDonerBAL = null;
-
 
             try
             {
@@ -39,8 +41,7 @@ namespace BloodBankAPI.Controllers
                 }
                 else
                 {
-                    objSearchAvailableBloodDonerBAL =new SearchAvailableBloodDonerBAL(_appDb);
-                    var result = await objSearchAvailableBloodDonerBAL.SearchAvailableBloodDoner(objRequest);
+                    var result = await _ibloodDoner.SearchAvailableBloodDoner(objRequest);
 
                     return Ok(result);
                 }
@@ -53,11 +54,6 @@ namespace BloodBankAPI.Controllers
 
                 return StatusCode((int)StatusCodes.Status500InternalServerError,objResponse);
             }
-            finally
-            {
-                objSearchAvailableBloodDonerBAL = null;
-            }
-           
         }
 
     }

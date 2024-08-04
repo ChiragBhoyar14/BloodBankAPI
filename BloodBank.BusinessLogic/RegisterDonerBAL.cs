@@ -66,7 +66,7 @@ namespace BloodBank.BusinessLogic
 
                             if (lstGetBloodGroupListDTO != null && lstGetBloodGroupListDTO.Count > 0)
                             {
-                                var Result = lstGetBloodGroupListDTO.FirstOrDefault(x => x.BloodGroup == objRequestRegisterDonerListDTO.BloodGroup);
+                                var Result = lstGetBloodGroupListDTO.FirstOrDefault(x => x.BloodGroup.ToLower() == objRequestRegisterDonerListDTO.BloodGroup.ToLower());
 
                                 if (Result != null)
                                 {
@@ -92,7 +92,7 @@ namespace BloodBank.BusinessLogic
 
                             if (lstStatelistDTO != null && lstStatelistDTO.Count > 0)
                             {
-                                var Result = lstStatelistDTO.FirstOrDefault(x => x.State == objRequestRegisterDonerListDTO.State);
+                                var Result = lstStatelistDTO.FirstOrDefault(x => x.State.ToLower() == objRequestRegisterDonerListDTO.State.ToLower());
 
                                 if (Result != null)
                                 {
@@ -118,7 +118,7 @@ namespace BloodBank.BusinessLogic
 
                             if (lstCityListDTO != null && lstCityListDTO.Count > 0)
                             {
-                                var Result = lstCityListDTO.FirstOrDefault(x => x.City == objRequestRegisterDonerListDTO.City);
+                                var Result = lstCityListDTO.FirstOrDefault(x => x.City.ToLower() == objRequestRegisterDonerListDTO.City.ToLower());
 
                                 if (Result != null)
                                 {
@@ -163,15 +163,15 @@ namespace BloodBank.BusinessLogic
                     {
                         if (objRequestRegisterDonerListDTO.Gender != null)
                         {
-                            if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "male")
+                            if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "male" || (objRequestRegisterDonerListDTO.Gender).ToLower() == "m")
                             {
                                 objRegisterDonerListDTO.Gender = "Male";
                             }
-                            else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "female")
+                            else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "female" || (objRequestRegisterDonerListDTO.Gender).ToLower() == "f")
                             {
                                 objRegisterDonerListDTO.Gender = "Female";
                             }
-                            else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "other")
+                            else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "other" || (objRequestRegisterDonerListDTO.Gender).ToLower() == "o")
                             {
                                 objRegisterDonerListDTO.Gender = "other";
                             }
@@ -281,6 +281,25 @@ namespace BloodBank.BusinessLogic
                             }
                         }
                     }
+                    if (Error == 0)
+                    {
+                        if(!String.IsNullOrEmpty(objRequestRegisterDonerListDTO.Password))
+                        {
+                            if (!Regex.IsMatch(objRequestRegisterDonerListDTO.Password, @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[^\s]{8,12}$"))
+                            {
+                                Error = 20;
+                            }
+                            else
+                            {
+                                objRegisterDonerListDTO.Password = General.EncryptString(objRequestRegisterDonerListDTO.Password, _appDb.Key, _appDb.IV);
+                            }
+
+                        }
+                        else
+                        {
+                            Error = 19;
+                        }
+                    }
                     if(Error == 0)
                     {
                         if (!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.Address))
@@ -295,7 +314,8 @@ namespace BloodBank.BusinessLogic
                     }
 
 
-                    if (Error == 0) {
+                    if (Error == 0)
+                    {
 
                         objRegisterDonerDAL = new RegisterDonerDAL(_appDb);
 
