@@ -6,6 +6,7 @@
         public long CityId { get; set; }
         public int BloodGroupId {  get; set; }
         public string Name { get; set; }
-        public string DonerId { get; set; }
+        public long DonerId { get; set; }
+      
     }
 }

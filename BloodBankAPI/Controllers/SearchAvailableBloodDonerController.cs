@@ -22,7 +22,7 @@ namespace BloodBankAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Response<List<SearchAvailableBloodDonerListDTO>>>> SearchAvailableBloodDoner(Request objRequest)
+        public async Task<IActionResult> SearchAvailableBloodDoner(Request objRequest)
         {
             Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
             SearchAvailableBloodDonerBAL objSearchAvailableBloodDonerBAL = new SearchAvailableBloodDonerBAL(_appDb);
@@ -32,27 +32,25 @@ namespace BloodBankAPI.Controllers
             {
                 if (objRequest == null)
                 {
-                    objResponse.StatusCode = 400; 
+                    objResponse.StatusCode = (int)StatusCodes.Status400BadRequest; 
                     objResponse.Status = "Invalid Request";
-                    objResponse.Data = null;
 
-                    return objResponse;
+                    return BadRequest(objResponse);
                 }
                 else
                 {                
                     var result = await objSearchAvailableBloodDonerBAL.SearchAvailableBloodDoner(objRequest);
 
-                      return result;
-                    
+                    return Ok(result);
                 }
             }
             catch (Exception ex)
             {
-                objResponse.StatusCode = 500;
+                objResponse.StatusCode = (int)StatusCodes.Status500InternalServerError;
                 objResponse.Status = "An error occurred while processing your request: " + ex.Message;
                 objResponse.Data = null;
 
-                return objResponse;
+                return StatusCode((int)StatusCodes.Status500InternalServerError,objResponse);
             }
             finally
             {

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace BloodBank.Properties
 {
-    public class Response <T>
+    public class StatelistDTO
     {
-        public long StatusCode { get; set; }
-        public string Status {  get; set; }
-        public T Data { get; set; }
-
+        public long StateId { get; set; }
+        public string State { get; set; }
     }
 }

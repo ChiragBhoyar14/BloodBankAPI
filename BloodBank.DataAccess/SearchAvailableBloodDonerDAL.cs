@@ -56,5 +56,112 @@ namespace BloodBank.DataAccess
 
         }
         #endregion Search Available Blood Doner 
+
+        #region Get Blood Group
+
+        public List<GetBloodGroupListDTO> GetBloodGroup()
+        {
+            List<GetBloodGroupListDTO> lstGetBloodGroupListDTO = null;
+
+            SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
+
+             connection.OpenAsync();
+
+            using (SqlCommand cmd = new SqlCommand("uspGetGetBloodGroup", connection))
+            {
+               
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    lstGetBloodGroupListDTO = ds.Tables[0].ToList<GetBloodGroupListDTO>();
+                }
+
+                if (lstGetBloodGroupListDTO != null && lstGetBloodGroupListDTO.Count > 0)
+                {
+                    return lstGetBloodGroupListDTO;
+                }
+                else
+                {
+                    return null;
+                }
+            };
+
+
+        }
+        #endregion Get Blood Group
+
+        #region Get State
+
+        public List<StatelistDTO> GetState()
+        {
+            List<StatelistDTO> lstStatelistDTO = null;
+
+            SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
+
+            using (SqlCommand cmd = new SqlCommand("uspGetState", connection))
+            { 
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    lstStatelistDTO  = ds.Tables[0].ToList<StatelistDTO>();
+                }
+
+                if (lstStatelistDTO != null && lstStatelistDTO.Count > 0)
+                {
+                    return lstStatelistDTO;
+                }
+                else
+                {
+                    return null;
+                }
+            };
+
+
+        }
+        #endregion
+
+        #region Get City
+
+        public List<CityListDTO> GetCityByStateId(long StateId)
+        {
+            List<CityListDTO> lstCityListDTO = null;
+
+            SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
+
+            connection.OpenAsync();
+
+            using (SqlCommand cmd = new SqlCommand("uspGetCityByStateId", connection))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    lstCityListDTO = ds.Tables[0].ToList<CityListDTO>();
+                }
+
+                if (lstCityListDTO != null && lstCityListDTO.Count > 0)
+                {
+                    return lstCityListDTO;
+                }
+                else
+                {
+                    return null;
+                }
+            };
+
+
+        }
+        #endregion Search Available Blood Doner 
+
+
+
     }
 }
