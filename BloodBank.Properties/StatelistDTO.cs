@@ -10,5 +10,11 @@ namespace BloodBank.Properties
     {
         public long StateId { get; set; }
         public string State { get; set; }
+
+        public StatelistDTO()
+        {
+            State = string.Empty;
+            StateId = 0;
+        }
     }
 }

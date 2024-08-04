@@ -59,13 +59,13 @@ namespace BloodBank.DataAccess
 
         #region Get Blood Group
 
-        public List<GetBloodGroupListDTO> GetBloodGroup()
+        public async  Task<List<GetBloodGroupListDTO>> GetBloodGroup()
         {
             List<GetBloodGroupListDTO> lstGetBloodGroupListDTO = null;
 
             SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
 
-             connection.OpenAsync();
+             await connection.OpenAsync();
 
             using (SqlCommand cmd = new SqlCommand("uspGetGetBloodGroup", connection))
             {
@@ -95,11 +95,13 @@ namespace BloodBank.DataAccess
 
         #region Get State
 
-        public List<StatelistDTO> GetState()
+        public async Task<List<StatelistDTO>> GetState()
         {
             List<StatelistDTO> lstStatelistDTO = null;
 
             SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
+
+            await connection.OpenAsync();
 
             using (SqlCommand cmd = new SqlCommand("uspGetState", connection))
             { 
@@ -128,16 +130,20 @@ namespace BloodBank.DataAccess
 
         #region Get City
 
-        public List<CityListDTO> GetCityByStateId(long StateId)
+        public async Task<List<CityListDTO>> GetCityByStateId(long StateId)
         {
             List<CityListDTO> lstCityListDTO = null;
 
             SqlConnection connection = new SqlConnection(_appDb.Connectionstring);
 
-            connection.OpenAsync();
+            await connection.OpenAsync();
 
             using (SqlCommand cmd = new SqlCommand("uspGetCityByStateId", connection))
             {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@StateId", SqlDbType.BigInt).Value = StateId;
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);

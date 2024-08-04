@@ -36,13 +36,14 @@ namespace BloodBank.BusinessLogic
 
             try
             {
+                objSearchAvailableBloodDonerDAL = new SearchAvailableBloodDonerDAL(_appDb);
+
                 if (Error == 0)
                 {
-                    objSearchAvailableBloodDonerDAL = new SearchAvailableBloodDonerDAL(_appDb);
 
                     if (objRequest.BloodGroupId > 0)
                     {
-                        lstGetBloodGroupListDTO = objSearchAvailableBloodDonerDAL.GetBloodGroup();
+                        lstGetBloodGroupListDTO = await objSearchAvailableBloodDonerDAL.GetBloodGroup();
 
                         if(lstGetBloodGroupListDTO != null && lstGetBloodGroupListDTO.Count> 0)
                         {
@@ -80,19 +81,27 @@ namespace BloodBank.BusinessLogic
 
                 if (Error == 0)
                 {
-                    if (objRequest.StateId > 0)
+                    if (!String.IsNullOrWhiteSpace(objRequest.State))
                     {
-                        lstStatelistDTO = objSearchAvailableBloodDonerDAL.GetState();
+                        lstStatelistDTO = await objSearchAvailableBloodDonerDAL.GetState();
 
                         if (lstStatelistDTO != null && lstStatelistDTO.Count > 0)
                         {
-                            bool exists = lstStatelistDTO.Any(x => x.StateId == objRequest.StateId);
+                            var Result = lstStatelistDTO.FirstOrDefault(x => x.State == objRequest.State);
 
-                            if (!exists)
+                            if (Result != null)
+                            {
+                                objRequest.StateId = Result.StateId;
+                            }
+                            else
                             {
                                 Error = 4;
                             }
                         }
+                    }
+                    else
+                    {
+                        Error = 9;
                     }
                 }
 
@@ -100,7 +109,7 @@ namespace BloodBank.BusinessLogic
                 {
                     if (objRequest.CityId > 0 && objRequest.StateId > 0)
                     {
-                        lstCityListDTO = objSearchAvailableBloodDonerDAL.GetCityByStateId(objRequest.StateId);
+                        lstCityListDTO = await objSearchAvailableBloodDonerDAL.GetCityByStateId(objRequest.StateId);
 
                         if (lstCityListDTO != null && lstCityListDTO.Count > 0)
                         {

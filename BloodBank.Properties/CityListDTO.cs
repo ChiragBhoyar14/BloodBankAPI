@@ -10,5 +10,11 @@ namespace BloodBank.Properties
     {
         public long CityId { get; set; }
         public string City { get; set; }
+
+        public CityListDTO()
+        {
+            CityId = 0;
+            City = string.Empty;
+        }
     }
 }

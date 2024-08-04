@@ -25,7 +25,7 @@ namespace BloodBankAPI.Controllers
         public async Task<IActionResult> SearchAvailableBloodDoner(Request objRequest)
         {
             Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
-            SearchAvailableBloodDonerBAL objSearchAvailableBloodDonerBAL = new SearchAvailableBloodDonerBAL(_appDb);
+            SearchAvailableBloodDonerBAL objSearchAvailableBloodDonerBAL = null;
 
 
             try
@@ -38,7 +38,8 @@ namespace BloodBankAPI.Controllers
                     return BadRequest(objResponse);
                 }
                 else
-                {                
+                {
+                    objSearchAvailableBloodDonerBAL =new SearchAvailableBloodDonerBAL(_appDb);
                     var result = await objSearchAvailableBloodDonerBAL.SearchAvailableBloodDoner(objRequest);
 
                     return Ok(result);
