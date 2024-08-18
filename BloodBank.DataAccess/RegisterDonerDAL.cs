@@ -54,6 +54,7 @@ namespace BloodBank.DataAccess
             {
                 cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = DBNull.Value;
             }
+            else
             {
                 cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = objRegisterDonerListDTO.Address;
             }
@@ -68,6 +69,8 @@ namespace BloodBank.DataAccess
             cmd.Parameters.Add("@HighSugarStatus", SqlDbType.Int).Value = objRegisterDonerListDTO.HighSugarStatusId;
             cmd.Parameters.Add("@HighBPStatus", SqlDbType.Int).Value = objRegisterDonerListDTO.HighBPStatusId;
             cmd.Parameters.Add("@IsAvailable", SqlDbType.Bit).Value = objRegisterDonerListDTO.IsAvailable;
+            cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = objRegisterDonerListDTO.Password;
+
 
 
             intReturn = cmd.ExecuteNonQuery();

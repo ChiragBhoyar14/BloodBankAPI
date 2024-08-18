@@ -1,6 +1,8 @@
-﻿using BloodBank.BusinessLogic;
+﻿
 using BloodBank.Comman;
+using BloodBank.IRepository;
 using BloodBank.Properties;
+using BloodBank.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,16 +13,18 @@ namespace BloodBankAPI.Controllers
     public class RegisterDonerController : ControllerBase
     {
         private readonly AppDb _appDb;
+        private readonly IBloodDoner _ibloodDoner;
 
-        public RegisterDonerController(AppDb appDb)
+        public RegisterDonerController(AppDb appDb, IBloodDoner ibloodDoner)
         {
             _appDb = appDb;
+            _ibloodDoner = ibloodDoner;
         }
 
+        [HttpPost]
         public async Task<IActionResult> RegisterDoner(RequestRegisterDonerListDTO objRequestRegisterDonerListDTO)
         {
             Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
-            RegisterDonerBAL objRegisterDonerBAL = null;
 
             try
             {
@@ -33,9 +37,8 @@ namespace BloodBankAPI.Controllers
                 }
                 else
                 {
-                    objRegisterDonerBAL = new RegisterDonerBAL(_appDb);
 
-                    var Result = await objRegisterDonerBAL.RegisterDoner(objRequestRegisterDonerListDTO);
+                    var Result = await _ibloodDoner.RegisterDoner(objRequestRegisterDonerListDTO);
 
                     return Ok(Result);
 
@@ -49,11 +52,6 @@ namespace BloodBankAPI.Controllers
                 return StatusCode((int)StatusCodes.Status500InternalServerError, objResponse);
 
             }
-            finally
-            {
-                objRegisterDonerBAL = null;
-            }
-
         }
     }
 }
