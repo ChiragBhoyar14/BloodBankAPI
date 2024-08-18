@@ -57,7 +57,7 @@ namespace BloodBank.BusinessLogic
 
                 if (Error == 0) { 
                 
-                    if (objRequest.Name != null) {
+                    if (!String.IsNullOrWhiteSpace(objRequest.Name)) {
                         if (!Regex.IsMatch(objRequest.Name, "^[a-zA-Z\\s]+$"))
                         {
                             Error = 2;

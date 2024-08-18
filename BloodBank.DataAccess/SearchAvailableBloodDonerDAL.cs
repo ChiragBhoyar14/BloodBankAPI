@@ -30,8 +30,8 @@ namespace BloodBank.DataAccess
                 cmd.Parameters.Add("@StateId", SqlDbType.BigInt).Value = objRequest.StateId;
                 cmd.Parameters.Add("@BloodGroupId", SqlDbType.BigInt).Value = objRequest.BloodGroupId;
                 cmd.Parameters.Add("@CityId", SqlDbType.BigInt).Value = objRequest.CityId;
-                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = objRequest.CityId;
-                cmd.Parameters.Add("@DonerId", SqlDbType.BigInt).Value = objRequest.CityId;
+                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = objRequest.Name;
+                cmd.Parameters.Add("@DonerId", SqlDbType.BigInt).Value = objRequest.DonerId;
 
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
