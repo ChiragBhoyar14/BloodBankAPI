@@ -22,6 +22,7 @@ namespace BloodBank.Properties
             BloodGroup = string.Empty ;
             State = string.Empty ;
             Password = string.Empty ;
+            UserName = string.Empty ;
         }
 
         public string Name { get; set; }
@@ -37,5 +38,6 @@ namespace BloodBank.Properties
         public string State { get; set; }
         public string City { get; set; }
         public string Password { get; set; }
+        public string UserName { get; set; }
     }
 }

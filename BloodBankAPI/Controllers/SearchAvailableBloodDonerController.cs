@@ -3,6 +3,7 @@ using BloodBank.Comman;
 using BloodBank.DataAccess;
 using BloodBank.IRepository;
 using BloodBank.Properties;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,16 @@ using System.Xml.Serialization;
 
 namespace BloodBankAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SearchAvailableBloodDonerController : ControllerBase
     {
-        public readonly AppDb _appDb;
         private readonly IBloodDoner _ibloodDoner;
 
 
-        public SearchAvailableBloodDonerController(AppDb appDb, IBloodDoner ibloodDoner)
+        public SearchAvailableBloodDonerController(IBloodDoner ibloodDoner)
         {
-            _appDb = appDb;
             _ibloodDoner = ibloodDoner;
         }
 

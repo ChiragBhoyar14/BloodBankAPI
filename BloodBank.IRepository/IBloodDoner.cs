@@ -14,5 +14,6 @@ namespace BloodBank.IRepository
 
         Task<Response<List<SearchAvailableBloodDonerListDTO>>> SearchAvailableBloodDoner(Request objRequest);
 
+        Task<Response<ResponseLoginListDTO>> LoginDoner(LoginListDTO objLoginListDto);
     }
 }
