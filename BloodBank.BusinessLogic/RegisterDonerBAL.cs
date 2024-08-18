@@ -212,7 +212,7 @@ namespace BloodBank.BusinessLogic
                             }
                             else
                             {
-                                objRegisterDonerListDTO.Email = objRequestRegisterDonerListDTO.Email;
+                                objRegisterDonerListDTO.Email = (objRequestRegisterDonerListDTO.Email).ToLower();
                             }
                         }
                     }
@@ -307,6 +307,33 @@ namespace BloodBank.BusinessLogic
                             objRegisterDonerListDTO.Address = objRequestRegisterDonerListDTO.Address;
                         }
                     }
+                    if(Error == 0)
+                    {
+                        if (objRequestRegisterDonerListDTO.UserName  != null)
+                        {
+                            if (!Regex.IsMatch(objRequestRegisterDonerListDTO.UserName, @"^[a-zA-Z0-9._$@]{3,20}$"))
+                            {
+                                Error = 22;
+                            }
+                            else
+                            {
+                                objRegisterDonerListDTO.UserName = objRequestRegisterDonerListDTO.UserName;
+                            }
+                        }
+                        else
+                        {
+                            if (objRegisterDonerListDTO.Email != null) 
+                            {
+                                objRegisterDonerListDTO.UserName = objRegisterDonerListDTO.Email;
+                            }
+                            else
+                            {
+                                objRegisterDonerListDTO.UserName = objRegisterDonerListDTO.Mobile;
+
+                            }
+                        }
+                    }
+
                     if(Error == 0)
                     {
                         objRegisterDonerListDTO.IsPublished = true;

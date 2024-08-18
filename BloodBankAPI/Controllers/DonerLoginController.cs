@@ -1,32 +1,32 @@
-﻿
-using BloodBank.Comman;
+﻿using BloodBank.Comman;
 using BloodBank.IRepository;
 using BloodBank.Properties;
-using BloodBank.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodBankAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class RegisterDonerController : ControllerBase
+    public class DonerLoginController : ControllerBase
     {
         private readonly IBloodDoner _ibloodDoner;
 
-        public RegisterDonerController(IBloodDoner ibloodDoner)
+
+        public DonerLoginController(IBloodDoner ibloodDoner)
         {
             _ibloodDoner = ibloodDoner;
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterDoner(RequestRegisterDonerListDTO objRequestRegisterDonerListDTO)
+        public async Task<IActionResult> DonerLogin(LoginListDTO objLoginListDTO)
         {
-            Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
+            Response<List<ResponseLoginListDTO>> objResponse = new Response<List<ResponseLoginListDTO>>();
 
             try
             {
-                if (objRequestRegisterDonerListDTO == null)
+                if (objLoginListDTO == null)
                 {
                     objResponse.StatusCode = (int)StatusCodes.Status400BadRequest;
                     objResponse.Status = "Invalid Request";
@@ -36,7 +36,7 @@ namespace BloodBankAPI.Controllers
                 else
                 {
 
-                    var Result = await _ibloodDoner.RegisterDoner(objRequestRegisterDonerListDTO);
+                    var Result = await _ibloodDoner.LoginDoner(objLoginListDTO);
 
                     return Ok(Result);
 
@@ -53,3 +53,4 @@ namespace BloodBankAPI.Controllers
         }
     }
 }
+

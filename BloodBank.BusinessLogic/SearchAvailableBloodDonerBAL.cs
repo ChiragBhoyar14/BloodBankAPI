@@ -1,6 +1,7 @@
 ﻿using BloodBank.Comman;
 using BloodBank.DataAccess;
 using BloodBank.Properties;
+using Microsoft.AspNetCore.Authorization;
 using System.Text.RegularExpressions;
 
 
@@ -16,6 +17,7 @@ namespace BloodBank.BusinessLogic
             _appDb = appDb;
         }
 
+       
         public async Task<Response<List<SearchAvailableBloodDonerListDTO>>> SearchAvailableBloodDoner(Request objRequest)
         {
 
@@ -57,7 +59,8 @@ namespace BloodBank.BusinessLogic
 
                 if (Error == 0) { 
                 
-                    if (objRequest.Name != null) {
+                    if (!string.IsNullOrEmpty(objRequest.Name) ) 
+                    {
                         if (!Regex.IsMatch(objRequest.Name, "^[a-zA-Z\\s]+$"))
                         {
                             Error = 2;

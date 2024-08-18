@@ -33,6 +33,7 @@ namespace BloodBank.Properties
         public string City { get; set; }
         public bool IsAvailable { get; set; }
         public string Password {  get; set; }
+        public string UserName { get; set; }
 
         public RegisterDonerListDTO()
         {
@@ -58,6 +59,7 @@ namespace BloodBank.Properties
             City = string.Empty;
             IsAvailable = false;
             Password = string.Empty;
+            UserName = string.Empty;
         }
     }
 }

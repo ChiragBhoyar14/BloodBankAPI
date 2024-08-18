@@ -70,8 +70,7 @@ namespace BloodBank.DataAccess
             cmd.Parameters.Add("@HighBPStatus", SqlDbType.Int).Value = objRegisterDonerListDTO.HighBPStatusId;
             cmd.Parameters.Add("@IsAvailable", SqlDbType.Bit).Value = objRegisterDonerListDTO.IsAvailable;
             cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = objRegisterDonerListDTO.Password;
-
-
+            cmd.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = objRegisterDonerListDTO.UserName;
 
             intReturn = cmd.ExecuteNonQuery();
 
