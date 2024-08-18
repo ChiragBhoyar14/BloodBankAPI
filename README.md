@@ -2,22 +2,34 @@
 
 ## Overview
 
-The BloodBank API is a .NET-based application designed to manage blood donor information. It includes functionality for user registration, login, searching available blood donors, and more. This API utilizes JWT for authentication and provides endpoints for various operations related to blood donation.
+The BloodBank API is a .NET-based application designed to manage blood donor information. It provides functionality for user registration, login, searching available blood donors, and more. The API uses JWT (JSON Web Tokens) for secure authentication and supports various operations related to blood donation.
 
 ## Features
 
-- **User Registration**: Allows new blood donors to register.
-- **Login**: Authenticates users and generates JWT tokens.
-- **Search for Donors**: Searches for available blood donors based on criteria.
-- **JWT Authentication**: Secure access to API endpoints using JWT tokens.
+- **User Registration**: Allows new blood donors to register with the system.
+- **Login**: Authenticates users and generates JWT tokens for secure access.
+- **Search for Donors**: Enables searching for available blood donors based on specified criteria.
+- **JWT Authentication**: Provides secure access to API endpoints using JWT tokens for authentication.
 
 ## Technologies Used
 
 - **.NET 8**: Framework for building the API.
-- **JWT**: JSON Web Token for authentication.
-- **ADO.NET**:Build connection with database.
-- **Microsoft.Extensions.Configuration**: Configuration management.
-- **Microsoft.IdentityModel.Tokens**: Token generation and validation.
+- **JWT (JSON Web Tokens)**: Used for secure authentication and authorization.
+- **ADO.NET**: Used for database connectivity and operations.
+- **Microsoft.Extensions.Configuration**: Manages application configuration.
+- **Microsoft.IdentityModel.Tokens**: Handles token generation and validation.
+
+## Architecture
+
+The API is designed using the Three-Tier Architecture, which includes:
+
+1. **Presentation Layer**: Handles user interaction through API endpoints.
+2. **Business Logic Layer (BLL)**: Contains core business logic for processing requests and applying business rules.
+3. **Data Access Layer (DAL)**: Manages data retrieval and persistence operations.
+
+## Design Patterns
+
+- **Repository Pattern**: Abstracts the data access layer, providing a collection-like interface for accessing domain objects.
 
 ## Getting Started
 
