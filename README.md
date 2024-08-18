@@ -14,8 +14,8 @@ The BloodBank API is a .NET-based application designed to manage blood donor inf
 ## Technologies Used
 
 - **.NET 8**: Framework for building the API.
-- **Entity Framework Core**: ORM for data access.
 - **JWT**: JSON Web Token for authentication.
+- **ADO.NET**:Build connection with database.
 - **Microsoft.Extensions.Configuration**: Configuration management.
 - **Microsoft.IdentityModel.Tokens**: Token generation and validation.
 
@@ -23,9 +23,9 @@ The BloodBank API is a .NET-based application designed to manage blood donor inf
 
 ### Prerequisites
 
-- [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or compatible database
-- [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [Visual Studio](https://visualstudio.microsoft.com/)
 
 ### Setup
 
