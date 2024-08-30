@@ -15,5 +15,11 @@ namespace BloodBank.IRepository
         Task<Response<List<SearchAvailableBloodDonerListDTO>>> SearchAvailableBloodDoner(Request objRequest);
 
         Task<Response<ResponseLoginListDTO>> LoginDoner(LoginListDTO objLoginListDto);
+
+        Task<List<CityListDTO>> GetCity(long StateID);
+
+        Task<List<GetBloodGroupListDTO>> BloodGroup();
+
+        Task<List<StatelistDTO>> GetState();
     }
 }

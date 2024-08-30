@@ -43,5 +43,23 @@ namespace BloodBank.Repository
             DonerLoginBAL objDonerLoginBAL = new DonerLoginBAL(_appDb, _jwd);
             return await objDonerLoginBAL.DonerLogin(objLoginListDto);
         }
+
+        public async Task<List<CityListDTO>> GetCity(long StateID)
+        {
+            RegisterDonerBAL objRegisterDonerBAL = new RegisterDonerBAL(_appDb);
+            return await objRegisterDonerBAL.GetCity(StateID);
+        }
+        public async Task<List<GetBloodGroupListDTO>> BloodGroup()
+        {
+            RegisterDonerBAL objRegisterDonerBAL = new RegisterDonerBAL(_appDb);
+            return await objRegisterDonerBAL.BloodGroup();
+        }
+
+        public async Task<List<StatelistDTO>> GetState()
+        {
+            RegisterDonerBAL objRegisterDonerBAL = new RegisterDonerBAL(_appDb);
+            return await objRegisterDonerBAL.GetState();
+
+        }
     }
 }

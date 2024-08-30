@@ -32,6 +32,8 @@ namespace BloodBank.BusinessLogic
             Response<ResponseLoginListDTO> objResponse = new Response<ResponseLoginListDTO>();
             List<DonerLoginListDTO> objDonerLoginListDTO = null;
             ResponseLoginListDTO objResponseLoginListDTO = new ResponseLoginListDTO();
+            ErrorCodeDAL objErrorCodeDAL = null;
+            List<GetErrorMassageByErrroCodeListDTO> lstGetErrorMassageByErrroCode = null;
 
             try
             {
@@ -39,26 +41,27 @@ namespace BloodBank.BusinessLogic
                 {
                     if (!string.IsNullOrEmpty(objLoginListDTO.UserName))
                     {
-                        if (!Regex.IsMatch(objLoginListDTO.UserName, @"^[a-zA-Z0-9._$@]{3,20}$"))
-                        {
-                            Error = 22;
-                        }
+                        //if (!Regex.IsMatch(objLoginListDTO.UserName, @"^[a-zA-Z0-9._$@]{3,20}$"))
+                        //{
+                        //    Error = 22;
+                        //}
+                    }
+                    else
+                    {
+                        Error = 23;
                     }
                 }
-                else
-                {
-                    Error = 23;
-                }
+                
 
                 if (Error == 0)
                 {
                     if (!string.IsNullOrEmpty(objLoginListDTO.Password))
                     {
-                        if (!Regex.IsMatch(objLoginListDTO.Password, @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[^\s]{8,12}$"))
-                        {
-                            Error = 20;
-                        }
-                        else
+                        //if (!Regex.IsMatch(objLoginListDTO.Password, @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[^\s]{8,12}$"))
+                        //{
+                        //    Error = 20;
+                        //}
+                        //else
                         {
                             objLoginListDTO.Password = General.EncryptString(objLoginListDTO.Password, _appDb.Key, _appDb.IV);
                         }
@@ -105,6 +108,18 @@ namespace BloodBank.BusinessLogic
                     {
                         objResponse.StatusCode = 404;
                         objResponse.Status = "Invalid UserName or Password";
+                    }
+                }
+                if (Error > 0)
+                {
+                    objErrorCodeDAL = new ErrorCodeDAL(_appDb);
+
+                    lstGetErrorMassageByErrroCode = objErrorCodeDAL.GetErrorMassageByErrroCode(Error);
+
+                    if (lstGetErrorMassageByErrroCode != null && lstGetErrorMassageByErrroCode.Count > 0)
+                    {
+                        objResponse.StatusCode = lstGetErrorMassageByErrroCode[0].ErrorCode;
+                        objResponse.Status = lstGetErrorMassageByErrroCode[0].ErrorMassage;
                     }
                 }
 
