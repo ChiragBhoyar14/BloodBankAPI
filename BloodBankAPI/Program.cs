@@ -40,21 +40,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 
-var ConnectionString = builder.Configuration["ConnectionStrings:BloodBankString"];
-var Key = builder.Configuration["Security:Key"];
-var IV = builder.Configuration["Security:IV"];
+builder.Services.Configure<AppDb>(builder.Configuration.GetSection("ConnectionStrings"));
 
-builder.Services.AddSingleton(_ => new AppDb(ConnectionString, Key, IV));
+builder.Services.Configure<JWD>(builder.Configuration.GetSection("Jwt"));
+
+builder.Services.Configure<CacheSetting>(builder.Configuration.GetSection("CacheSetting"));
+
 builder.Services.AddSingleton<IBloodDoner, BloodDoner>();
 
-var JWDKey = builder.Configuration["Jwt:Key"];
-var Issuer = builder.Configuration["Jwt:Issuer"];
-var Audience = builder.Configuration["Jwt:Audience"];
-var ExpiryTimeExpiryTime = builder.Configuration["Jwt:ExpiryTime"];
-
-builder.Services.AddSingleton(_ => new JWD(JWDKey, Audience, Issuer, ExpiryTimeExpiryTime));
-
-
+builder.Services.AddMemoryCache();
+builder.Services.AddLazyCache();
 
 builder.Services.AddAuthorization();
 
