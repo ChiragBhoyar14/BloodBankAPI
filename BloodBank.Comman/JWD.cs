@@ -8,17 +8,10 @@ namespace BloodBank.Comman
 {
     public class JWD
     {
-        public JWD(string key, string audience, string issuer, string expiryTime)
-        {
-            Key = key;
-            Audience = audience;
-            Issuer = issuer;
-            ExpiryTime = Convert.ToDouble(expiryTime);
-        }
 
-        public string Key { get;private set; }
-        public string Audience { get; private set; }
-        public string Issuer { get; private set; }
-        public double ExpiryTime { get; private set; }
+        public string Key { get; set; }
+        public string Audience { get; set; }
+        public string Issuer { get; set; }
+        public double ExpiryTime { get; set; }
     }
 }

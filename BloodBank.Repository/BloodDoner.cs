@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Comman;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BloodBank.Repository
 {
@@ -17,10 +18,10 @@ namespace BloodBank.Repository
         private readonly JWD _jwd;
 
 
-        public BloodDoner(AppDb appDb, JWD jwd)
+        public BloodDoner(IOptions<AppDb> appDb, IOptions<JWD> jwd)
         {
-            _appDb = appDb;
-            _jwd = jwd;
+            _appDb = appDb.Value;
+            _jwd = jwd.Value;
         }
 
         public async Task<Response<string>> RegisterDoner(RequestRegisterDonerListDTO objRequestRegisterDonerListDTO)
