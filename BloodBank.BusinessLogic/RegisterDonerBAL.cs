@@ -1,6 +1,7 @@
 ﻿using BloodBank.Comman;
 using BloodBank.DataAccess;
 using BloodBank.Properties;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,21 +63,21 @@ namespace BloodBank.BusinessLogic
                     {
                         if (!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.BloodGroup))
                         {
-                            lstGetBloodGroupListDTO = await objSearchAvailableBloodDonerDAL.GetBloodGroup();
+                            // lstGetBloodGroupListDTO = await objSearchAvailableBloodDonerDAL.GetBloodGroup();
 
-                            if (lstGetBloodGroupListDTO != null && lstGetBloodGroupListDTO.Count > 0)
-                            {
-                                var Result = lstGetBloodGroupListDTO.FirstOrDefault(x => x.BloodGroup.ToLower() == objRequestRegisterDonerListDTO.BloodGroup.ToLower());
+                            //if (lstGetBloodGroupListDTO != null && lstGetBloodGroupListDTO.Count > 0)
+                            //{
+                            //    var Result = lstGetBloodGroupListDTO.FirstOrDefault(x => x.BloodGroup.ToLower() == objRequestRegisterDonerListDTO.BloodGroup.ToLower());
 
-                                if (Result != null)
+                                if (objRequestRegisterDonerListDTO.BloodGroup != null && Convert.ToInt32(objRequestRegisterDonerListDTO.BloodGroup) > 0)
                                 {
-                                    objRegisterDonerListDTO.BloodGroupId = Result.BloodGroupId;
+                                    objRegisterDonerListDTO.BloodGroupId = Convert.ToInt32(objRequestRegisterDonerListDTO.BloodGroup);
                                 }
                                 else
                                 {
                                     Error = 8;
                                 }
-                            }
+                            //}
                         }
                         else
                         {
@@ -86,23 +87,23 @@ namespace BloodBank.BusinessLogic
 
                     if (Error == 0)
                     {
-                        if (!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.State))
+                        if (!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.State) )
                         {
-                            lstStatelistDTO = await objSearchAvailableBloodDonerDAL.GetState();
+                            //lstStatelistDTO = await objSearchAvailableBloodDonerDAL.GetState();
 
-                            if (lstStatelistDTO != null && lstStatelistDTO.Count > 0)
-                            {
-                                var Result = lstStatelistDTO.FirstOrDefault(x => x.State.ToLower() == objRequestRegisterDonerListDTO.State.ToLower());
+                            //if (lstStatelistDTO != null && lstStatelistDTO.Count > 0)
+                            //{
+                            //    var Result = lstStatelistDTO.FirstOrDefault(x => x.State.ToLower() == objRequestRegisterDonerListDTO.State.ToLower());
 
-                                if (Result != null)
-                                {
-                                    objRegisterDonerListDTO.StateId = Result.StateId;
-                                }
-                                else
-                                {
-                                    Error = 4;
-                                }
-                            }
+                                //if (Result != null)
+                                //{
+                                    objRegisterDonerListDTO.StateId = Convert.ToInt32(objRequestRegisterDonerListDTO.State);
+                                //}
+                                //else
+                                //{
+                                //    Error = 4;
+                                //}
+                            //}
                         }
                         else
                         {
@@ -118,7 +119,7 @@ namespace BloodBank.BusinessLogic
 
                             if (lstCityListDTO != null && lstCityListDTO.Count > 0)
                             {
-                                var Result = lstCityListDTO.FirstOrDefault(x => x.City.ToLower() == objRequestRegisterDonerListDTO.City.ToLower());
+                                var Result = lstCityListDTO.FirstOrDefault(x => x.CityId == Convert.ToInt64(objRequestRegisterDonerListDTO.City));
 
                                 if (Result != null)
                                 {
@@ -173,7 +174,7 @@ namespace BloodBank.BusinessLogic
                             }
                             else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "other" || (objRequestRegisterDonerListDTO.Gender).ToLower() == "o")
                             {
-                                objRegisterDonerListDTO.Gender = "other";
+                                objRegisterDonerListDTO.Gender = "Other";
                             }
                             else
                             {
@@ -218,7 +219,7 @@ namespace BloodBank.BusinessLogic
                     }
                     if (Error == 0)
                     {
-                        if (!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.LastDonationDate.ToString()))
+                        if ((!String.IsNullOrWhiteSpace(objRequestRegisterDonerListDTO.LastDonationDate.ToString())) && objRequestRegisterDonerListDTO.LastDonationDate != DateTime.MinValue)
                         {
                             if (objRequestRegisterDonerListDTO.LastDonationDate < DateTime.Now.AddMonths(-6))
                             {
@@ -393,5 +394,94 @@ namespace BloodBank.BusinessLogic
 
             return objResponse;
         }
+
+        #region GetState
+        public async Task<List<StatelistDTO>> GetState()
+        {
+            List<StatelistDTO> lstlstStatelistDTO = null;
+            SearchAvailableBloodDonerDAL objSearchAvailableBloodDonerDAL = new(_appDb);
+
+            try
+            {
+                lstlstStatelistDTO = await objSearchAvailableBloodDonerDAL.GetState();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            if (lstlstStatelistDTO.Count > 0 && lstlstStatelistDTO != null)
+            {
+
+                return lstlstStatelistDTO;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region BloodGroup
+        public async Task<List<GetBloodGroupListDTO>> BloodGroup()
+        {
+            List<GetBloodGroupListDTO> lstGetBloodGroupListDTO = null;
+            SearchAvailableBloodDonerDAL objSearchAvailableBloodDonerDAL = new(_appDb);
+
+            try
+            {
+                lstGetBloodGroupListDTO = await objSearchAvailableBloodDonerDAL.GetBloodGroup();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            if (lstGetBloodGroupListDTO.Count > 0 && lstGetBloodGroupListDTO != null)
+            {
+
+                return lstGetBloodGroupListDTO;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region GetCity
+        public async Task<List<CityListDTO>> GetCity([FromBody]long StateID)
+        {
+            List<CityListDTO> lstCityListDTO = null;
+            SearchAvailableBloodDonerDAL objSearchAvailableBloodDonerDAL = new(_appDb);
+
+            try
+            {
+                if (StateID != null && StateID > 0)
+                {
+                    lstCityListDTO = await objSearchAvailableBloodDonerDAL.GetCityByStateId(StateID);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            if (lstCityListDTO.Count > 0 && lstCityListDTO != null)
+            {
+
+                return lstCityListDTO;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

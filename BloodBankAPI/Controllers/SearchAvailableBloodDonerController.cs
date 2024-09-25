@@ -26,7 +26,7 @@ namespace BloodBankAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchAvailableBloodDoner(Request objRequest)
+        public async Task<IActionResult> SearchAvailableBloodDoner([FromBody]Request objRequest)
         {
             Response<List<SearchAvailableBloodDonerListDTO>> objResponse = new Response<List<SearchAvailableBloodDonerListDTO>>();
 

@@ -100,10 +100,10 @@ namespace BloodBank.BusinessLogic
                             }
                         }
                     }
-                    else
-                    {
-                        Error = 9;
-                    }
+                    //else
+                    //{
+                    //    Error = 9;
+                    //}
                 }
 
                 if (Error == 0)
