@@ -42,9 +42,6 @@ The API is designed using the Three-Tier Architecture, which includes:
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - [Visual Studio](https://visualstudio.microsoft.com/)
-- **NuGet Packages**:
-  - `Microsoft.Extensions.Caching.Memory`
-  - `LazyCache.AspNetCore`
 
 ### Setup
 
