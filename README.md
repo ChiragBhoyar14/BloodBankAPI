@@ -17,7 +17,8 @@ The BloodDonor API is a .NET-based application designed to manage blood donor in
 - **.NET 8**: Framework for building the API.
 - **JWT (JSON Web Tokens)**: Used for secure authentication and authorization.
 - **ADO.NET**: Used for database connectivity and operations.
-- **Microsoft.Extensions.Caching.Memory**: Used to implement in-memory caching for the `GetState` and `GetBloodGroup` APIs.
+- **Microsoft.Extensions.Caching.Memory**: Used to implement in-memory caching for various API endpoints.
+- **LazyCache**: A wrapper around `MemoryCache` to provide simple, lazy-loaded caching for ASP.NET applications.
 - **Microsoft.Extensions.Configuration**: Manages application configuration.
 - **Microsoft.IdentityModel.Tokens**: Handles token generation and validation.
 
@@ -41,6 +42,9 @@ The API is designed using the Three-Tier Architecture, which includes:
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - [Visual Studio](https://visualstudio.microsoft.com/)
+- **NuGet Packages**:
+  - `Microsoft.Extensions.Caching.Memory`
+  - `LazyCache.AspNetCore`
 
 ### Setup
 
