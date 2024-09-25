@@ -17,11 +17,11 @@ namespace BloodBankAPI.Controllers
             _ibloodDoner = bloodDoner;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetCityByStateId([FromBody] StatelistDTO objStatelistDTO)
+        [HttpGet]
+        public async Task<IActionResult> GetCityByStateId([FromBody]int StateId)
         {
 
-            var Result = await _ibloodDoner.GetCity(objStatelistDTO.StateId);
+            var Result = await _ibloodDoner.GetCity(StateId);
 
             return Ok(Result);
         }
