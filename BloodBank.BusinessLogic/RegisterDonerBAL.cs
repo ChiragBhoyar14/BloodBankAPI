@@ -174,7 +174,7 @@ namespace BloodBank.BusinessLogic
                             }
                             else if ((objRequestRegisterDonerListDTO.Gender).ToLower() == "other" || (objRequestRegisterDonerListDTO.Gender).ToLower() == "o")
                             {
-                                objRegisterDonerListDTO.Gender = "other";
+                                objRegisterDonerListDTO.Gender = "Other";
                             }
                             else
                             {

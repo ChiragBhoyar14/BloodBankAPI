@@ -17,7 +17,7 @@ namespace BloodBankAPI.Controllers
             _ibloodDoner = bloodDoner;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetCityByStateId([FromBody]int StateId)
         {
 
